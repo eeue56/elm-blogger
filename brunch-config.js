@@ -52,6 +52,16 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    elmBrunch: {
+      // Set to path where elm-package.json is located, defaults to project root (optional)
+      // if your elm files are not in /app then make sure to configure paths.watched in main brunch config
+      elmFolder: 'web/static/elm',
+      // Set to the elm file(s) containing your "main" function
+      // `elm make` handles all elm dependencies (required)
+      // relative to `elmFolder`
+      mainModules: ['Main.elm'],
+      outputFolder: '../../../priv/static/js/elm'
     }
   },
 
