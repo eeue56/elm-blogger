@@ -8,6 +8,9 @@ To start the app:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+    * You may need to create a role in postgres for the DB user:
+    * `$ psql`
+    * `=# CREATE ROLE postgres LOGIN CREATEDB;`
   * Install Node.js dependencies with `npm install`
   * Start Phoenix endpoint with `mix phoenix.server`
 
