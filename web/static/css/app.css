@@ -76,3 +76,15 @@ form.link, form.button {
     border-bottom: 0;
   }
 }
+
+/* Elm blogger stuff */
+
+div.edit textarea {
+    width: 100%;
+    height: 20em;
+}
+
+div.display {
+    background-color: #DDDDDD;
+    padding: 1em;
+}
