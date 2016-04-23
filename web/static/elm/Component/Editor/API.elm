@@ -1,12 +1,7 @@
 module Component.Editor.API (..) where
 
-import Html exposing (Html)
-import StartApp
-import Effects exposing (Never)
-import Task exposing (Task)
+
 import Component.Editor.Update exposing (update, Action(..), Addresses)
-import Component.Editor.Model exposing (Model)
-import Component.Editor.View exposing (view)
 
 
 initialText =
@@ -15,33 +10,6 @@ initialText =
 
 Put [markdown](https://daringfireball.net/projects/markdown/) text here.
 """
-
-
-app : StartApp.App (Model {})
-app =
-  let
-    initModel : Model {}
-    initModel =
-      { inputText = initialText }
-
-    modelWithEffects =
-      ( initModel, Effects.none )
-
-    addresses =
-      { editor = editorMailbox.address }
-  in
-    StartApp.start
-      { init = modelWithEffects
-      , view = (view addresses)
-      , update = (update addresses)
-      , inputs = [ editorMailbox.signal ]
-      }
-
-
-main : Signal Html
-main =
-  app.html
-
 
 editorMailbox : Signal.Mailbox Action
 editorMailbox =

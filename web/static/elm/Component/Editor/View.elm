@@ -10,7 +10,7 @@ import Component.Editor.Model exposing (..)
 import Component.Editor.Update exposing (..)
 
 
-view : Addresses a -> Signal.Address Action -> Model b -> Html
+view : Addresses a -> Signal.Address dontcare -> Model b -> Html
 view addresses _ model =
   div
     [ class "view" ]
