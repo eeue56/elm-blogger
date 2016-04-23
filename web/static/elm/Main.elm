@@ -1,5 +1,5 @@
-import Editor.API  
+import Component.Editor.API
 
 main =
-  Editor.API.main
-        
+  Component.Editor.API.main
+
