@@ -15,11 +15,11 @@ type alias Addresses a =
   }
 
 
-update : Addresses a -> Action -> Model -> ( Model, Effects.Effects Action )
+update : Addresses a -> Action -> Model b -> ( Model b, Effects.Effects Action )
 update addresses action model =
   case action of
     NoOp ->
       ( model, Effects.none )
 
     ModifyText str ->
-      ( { model | text = str }, Effects.none )
+      ( { model | inputText = str }, Effects.none )
