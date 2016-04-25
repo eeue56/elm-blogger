@@ -60,7 +60,7 @@ exports.config = {
       // Set to the elm file(s) containing your "main" function
       // `elm make` handles all elm dependencies (required)
       // relative to `elmFolder`
-      mainModules: ['Main.elm'],
+      mainModules: ['Creator/Main.elm'],
       outputFolder: '../../../priv/static/js/elm'
     }
   },
