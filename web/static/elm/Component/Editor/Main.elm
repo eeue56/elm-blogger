@@ -1,4 +1,4 @@
-module Component.Editor.Main where
+module Component.Editor.Main exposing (..) -- where
 
 import Html exposing (Html)
 import StartApp

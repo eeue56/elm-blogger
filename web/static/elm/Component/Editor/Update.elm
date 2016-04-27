@@ -1,25 +1,18 @@
-module Component.Editor.Update (..) where
+module Component.Editor.Update exposing (..) -- where
 
-import Effects exposing (Effects)
 import Component.Editor.Model exposing (..)
 
 
-type Action
+type Msg
   = NoOp
   | ModifyText String
 
 
-type alias Addresses a =
-  { a
-  | editor : Signal.Address Action
-  }
-
-
-update : Addresses a -> Action -> Model b -> ( Model b, Effects.Effects Action )
-update addresses action model =
+update : Msg -> Model b -> ( Model b, Cmd Msg )
+update action model =
   case action of
     NoOp ->
-      ( model, Effects.none )
+      ( model, Cmd.none )
 
     ModifyText str ->
-      ( { model | inputText = str }, Effects.none )
+      ( { model | inputText = str }, Cmd.none )

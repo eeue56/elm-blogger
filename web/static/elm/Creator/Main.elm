@@ -1,47 +1,28 @@
-module Creator.Main where
+module Creator.Main exposing (..) -- where
 
 import Html exposing (Html)
-import StartApp
-import Effects exposing (Never)
-import Task exposing (Task)
+import Html.App as Html
 
 import Creator.Update exposing (router, MessageRouter(..))
 import Creator.Model exposing (Model)
 import Creator.View exposing (view)
-import Creator.API exposing (..)
-import Component.Editor.API exposing (initialText, editorMailbox)
+import Component.Editor.API exposing (initialText)
 
 
-
-app : StartApp.App Model
-app =
+main =
     let
         initModel : Model
         initModel =
             { inputText = initialText }
 
         modelWithEffects =
-            (initModel, Effects.none)
+            (initModel, Cmd.none)
 
-        addresses =
-            { editor = editorMailbox.address
-            , top = creatorMailbox.address
-            }
     in
-        StartApp.start
+        Html.program
             { init = modelWithEffects
-            , view = (view addresses)
-            , update = (router addresses)
-            , inputs =
-              [ Signal.map (EditorLevel) editorMailbox.signal
-              , Signal.map (TopLevel) creatorMailbox.signal
-              ]
+            , view = view
+            , update = router
+            , subscriptions = (\_ -> Sub.none)
             }
 
-main : Signal Html
-main =
-    app.html
-
-port tasks : Signal (Task.Task Never ())
-port tasks =
-    app.tasks

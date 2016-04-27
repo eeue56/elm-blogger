@@ -1,26 +1,20 @@
-module Creator.Update where
+module Creator.Update exposing (..) -- where
 
-import Effects exposing (Effects)
 import Creator.Model exposing (..)
 import Component.Editor.Update as EditorUpdate
 
-type Action
+type Msg
   = NoOp
 
-type alias Addresses =
-  { editor : Signal.Address EditorUpdate.Action
-  , top : Signal.Address Action
-  }
-
 type MessageRouter
-  = TopLevel Action
-  | EditorLevel EditorUpdate.Action
+  = TopLevel Msg
+  | EditorLevel EditorUpdate.Msg
 
-update : Addresses -> Action -> Model -> (Model, Effects.Effects Action)
-update addresses action model =
+update : Msg -> Model -> (Model, Cmd Msg)
+update action model =
   case action of
     NoOp ->
-      (model, Effects.none)
+      (model, Cmd.none)
 
 
 {-| We use this router for composing our actions and components together
@@ -28,19 +22,21 @@ Each component provides an API which is scoped through MessageRouter.
 In order for cross-component communication, we expose the addresses to each component.
 From there, they can trigger Actions elsehwere.
 -}
-router : Addresses -> MessageRouter -> Model -> (Model, Effects.Effects MessageRouter)
-router addresses route model =
+router : MessageRouter -> Model -> (Model, Cmd MessageRouter)
+router route model =
   case route of
     TopLevel action ->
       let
-        (model, effect) =
-          update addresses action model
+        (model', effect) =
+          update action model
       in
-        ( model, Effects.map (TopLevel) effect )
+        ( model', Cmd.map (TopLevel) effect )
 
     EditorLevel action ->
       let
-        (model, effect) =
-          EditorUpdate.update addresses action model
+        _ =
+          Debug.log "here" model
+        (model', effect) =
+          EditorUpdate.update action model
       in
-        ( model, Effects.map (EditorLevel) effect )
+        ( model', Cmd.map (EditorLevel) effect )
