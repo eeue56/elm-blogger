@@ -17,10 +17,8 @@ update action model =
       (model, Cmd.none)
 
 
-{-| We use this router for composing our actions and components together
+{-| We use this router for composing our messages and components together
 Each component provides an API which is scoped through MessageRouter.
-In order for cross-component communication, we expose the addresses to each component.
-From there, they can trigger Actions elsehwere.
 -}
 router : MessageRouter -> Model -> (Model, Cmd MessageRouter)
 router route model =
@@ -34,8 +32,6 @@ router route model =
 
     EditorLevel action ->
       let
-        _ =
-          Debug.log "here" model
         (model', effect) =
           EditorUpdate.update action model
       in

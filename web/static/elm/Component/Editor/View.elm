@@ -19,7 +19,7 @@ view model =
         [ div
             [ class "pure-u-1-2 edit" ]
             [ textarea
-                [ value (Debug.log "text" model.inputText)
+                [ value model.inputText
                 , onInput ModifyText
                 , class "inputarea"
                 ]

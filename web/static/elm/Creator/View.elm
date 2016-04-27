@@ -12,7 +12,4 @@ import Component.Editor.View as EditorView
 
 view : Model -> Html MessageRouter
 view model =
-    let
-        _ = Debug.log "model" model
-    in
-        Html.map (EditorLevel) (EditorView.view model)
+    Html.map EditorLevel (EditorView.view model)
