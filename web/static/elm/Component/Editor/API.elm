@@ -1,7 +1,4 @@
-module Component.Editor.API (..) where
-
-
-import Component.Editor.Update exposing (update, Action(..), Addresses)
+module Component.Editor.API exposing (..) -- where
 
 
 initialText =
@@ -10,7 +7,3 @@ initialText =
 
 Put [markdown](https://daringfireball.net/projects/markdown/) text here.
 """
-
-editorMailbox : Signal.Mailbox Action
-editorMailbox =
-  Signal.mailbox NoOp

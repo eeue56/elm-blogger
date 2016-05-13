@@ -1,17 +1,16 @@
-module Component.Editor.View (..) where
+module Component.Editor.View exposing (..) -- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Signal
 import Markdown
 
 import Component.Editor.Model exposing (..)
 import Component.Editor.Update exposing (..)
 
 
-view : Addresses a -> Signal.Address dontcare -> Model b -> Html
-view addresses _ model =
+view : Model a -> Html Msg
+view model =
   div
     [ class "view" ]
     [ h1 [] [ text "Elm Markdown Editor" ]
@@ -21,13 +20,13 @@ view addresses _ model =
             [ class "pure-u-1-2 edit" ]
             [ textarea
                 [ value model.inputText
-                , on "input" targetValue (Signal.message addresses.editor << ModifyText)
+                , onInput ModifyText
                 , class "inputarea"
                 ]
                 []
             ]
         , div
             [ class "pure-u-1-2 display" ]
-            [ Markdown.toHtml model.inputText ]
+            [ Markdown.toHtmlWith Markdown.defaultOptions  [] (model.inputText) ]
         ]
     ]

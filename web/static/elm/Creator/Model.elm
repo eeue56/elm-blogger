@@ -1,4 +1,4 @@
-module Creator.Model where
+module Creator.Model exposing (..)
 
 import Component.Editor.Model as EditorModel
 

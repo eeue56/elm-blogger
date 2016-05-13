@@ -1,36 +1,25 @@
-module Component.Editor.Main where
+module Component.Editor.Main exposing (..) -- where
 
 import Html exposing (Html)
-import StartApp
-import Effects exposing (Never)
-import Task exposing (Task)
-
-import Component.Editor.Update exposing (update, Action(..), Addresses)
+import Html.App as Html
+import Component.Editor.Update exposing (update)
 import Component.Editor.Model exposing (Model)
 import Component.Editor.View exposing (view)
-import Component.Editor.API exposing (editorMailbox, initialText)
+import Component.Editor.API exposing (initialText)
 
-app : StartApp.App (Model {})
-app =
-  let
-    initModel : Model {}
-    initModel =
-      { inputText = initialText }
-
-    modelWithEffects =
-      ( initModel, Effects.none )
-
-    addresses =
-      { editor = editorMailbox.address }
-  in
-    StartApp.start
-      { init = modelWithEffects
-      , view = (view addresses)
-      , update = (update addresses)
-      , inputs = [ editorMailbox.signal ]
-      }
-
-
-main : Signal Html
 main =
-  app.html
+    let
+        initModel : Model {}
+        initModel =
+            { inputText = initialText }
+
+        modelWithEffects =
+            (initModel, Cmd.none)
+
+    in
+        Html.program
+            { init = modelWithEffects
+            , view = view
+            , update = update
+            , subscriptions = (\_ -> Sub.none)
+            }

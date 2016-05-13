@@ -1,15 +1,15 @@
-module Creator.View (..) where
+module Creator.View exposing (..) -- where
 
+import Html.App as Html
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Signal
 
 import Creator.Model exposing (..)
 import Creator.Update exposing (..)
 import Component.Editor.View as EditorView
 
 
-view : Addresses -> Signal.Address dontcare -> Model -> Html
-view addresses _ model =
-    EditorView.view addresses addresses.editor model
+view : Model -> Html MessageRouter
+view model =
+    Html.map EditorLevel (EditorView.view model)
