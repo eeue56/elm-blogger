@@ -1,0 +1,17 @@
+{
+    "version": "1.1.1",
+    "summary": "Tests for Elm's standard libraries",
+    "repository": "http://github.com/elm-lang/core.git",
+    "license": "BSD3",
+    "source-directories": [
+        ".",
+        "../src"
+    ],
+    "exposed-modules": [ ],
+    "native-modules": true,
+    "dependencies": {
+        "laszlopandy/elm-console": "1.0.2 <= v < 2.0.0",
+        "deadfoxygrandpa/elm-test": "3.0.0 <= v < 4.0.0"
+    },
+    "elm-version": "0.16.0 <= v < 0.17.0"
+}

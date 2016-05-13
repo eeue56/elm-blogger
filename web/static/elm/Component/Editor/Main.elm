@@ -11,7 +11,11 @@ main =
     let
         initModel : Model {}
         initModel =
-            { inputText = initialText }
+            { inputText = initialText
+            , channelName = ""
+            , refNumber = 0
+            , connected = False
+            }
 
         modelWithEffects =
             (initModel, Cmd.none)

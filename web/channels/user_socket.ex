@@ -2,7 +2,7 @@ defmodule ElmBlogger.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", ElmBlogger.RoomChannel
+  channel "editor:*", ElmBlogger.EditorChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
