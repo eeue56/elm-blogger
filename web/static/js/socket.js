@@ -51,12 +51,32 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+// socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+//
+// let channel           = socket.channel("editor:other", {})
+// let chatInput         = $("#chat-input")
+// let messagesContainer = $("#messages")
+
+
+
+// channel.join()
+//   .receive("ok", resp => { console.log("Joined successfully", resp) })
+//   .receive("error", resp => { console.log("Unable to join", resp) })
+
+
+
+// channel.on("new_msg", payload => {
+//   messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
+// })
+
+// chatInput.on("keypress", event => {
+//   if(event.keyCode === 13){
+//     channel.push("new_msg", {body: chatInput.val()})
+//     chatInput.val("")
+//   }
+// })
+
 
 export default socket

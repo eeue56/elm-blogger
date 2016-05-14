@@ -28,5 +28,6 @@ view model =
         , div
             [ class "pure-u-1-2 display" ]
             [ Markdown.toHtmlWith Markdown.defaultOptions  [] (model.inputText) ]
+        , input [ onInput SetChannelName ] []
         ]
     ]

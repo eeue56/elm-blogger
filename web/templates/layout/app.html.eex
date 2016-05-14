@@ -31,6 +31,7 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/elm/main.js") %>"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

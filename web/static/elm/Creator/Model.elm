@@ -1,6 +1,8 @@
-module Creator.Model exposing (..)
+module Creator.Model exposing (..) -- where
 
 import Component.Editor.Model as EditorModel
+import Phoenix.Channel.Model as ChannelModel
+
 
 type alias Model =
-  EditorModel.Model {}
+  ChannelModel.Model (EditorModel.Model {})

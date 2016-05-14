@@ -1,1 +1,3 @@
 <div id="elm-container"></div>
+<div id="messages"></div>
+<input id="chat-input" type="text"></input>
