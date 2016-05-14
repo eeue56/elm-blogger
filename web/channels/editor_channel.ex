@@ -8,7 +8,7 @@ defmodule ElmBlogger.EditorChannel do
 
   def handle_in("new_msg", incoming_string, socket) do
     IO.puts "*******************#{incoming_string}"
-    broadcast! socket, "new_msg", %{status: :ok}
+    broadcast! socket, "new_msg", %{status: :ok, response: "hello"}
     {:noreply, socket}
   end
 

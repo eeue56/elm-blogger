@@ -7,11 +7,11 @@ import Creator.Update exposing (router, MessageRouter(..), Msg(..))
 import Creator.Model exposing (Model)
 import Creator.View exposing (view)
 import Component.Editor.API exposing (initialText)
+import Phoenix.Channel.Update exposing (assignResponseType)
 
 import MyWebSocket
 import WebSocket
 import Helper exposing (stringify)
-
 
 main =
     let
@@ -21,11 +21,12 @@ main =
             , channelName = ""
             , refNumber = 0
             , connected = False
+            , socketEvents = []
             }
 
 
         modelWithEffects =
-            (initModel, Cmd.none) -- Cmd.map (TopLevel << (\_ -> NoOp)) sendInit )
+            (initModel, Cmd.none)
 
     in
         Html.program
@@ -35,20 +36,7 @@ main =
             , subscriptions = handleSubscriptions
             }
 
-
-
 handleSubscriptions : Model -> Sub MessageRouter
 handleSubscriptions mode =
-    let _ = Debug.log "handleSubscriptions" "te " in
-    WebSocket.listen "ws://localhost:4000/socket/websocket" (TopLevel << Payload)
+    WebSocket.listen "ws://localhost:4000/socket/websocket" (ChannelLevel << assignResponseType)
 
-
-test refNumber =
-    stringify
-        { payload = {}
-        , topic = "editor:other"
-        , event = "phx_join"
-        , ref = 0
-        }
-
---userToken : (a -> msg) -> Sub msg
