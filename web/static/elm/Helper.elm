@@ -1,7 +1,7 @@
 module Helper exposing (stringify) --where
 
-import Native.Stringify
+import Json.Encode
 
-stringify : a -> String
+stringify : Json.Encode.Value -> String
 stringify =
-    Native.Stringify.stringify
+    Json.Encode.encode 0

@@ -1,13 +1,14 @@
 module Component.Editor.Update exposing (..) -- where
 
+import Json.Encode
 import Component.Editor.Model exposing (..)
-import Helper exposing (stringify)
-import MyWebSocket
+import Phoenix.Channel.Update as ChannelUpdate
 
 type Msg
   = NoOp
   | ModifyText String
   | SetChannelName String
+  | ChannelUpdate ChannelUpdate.Msg
 
 
 buildJson model =
@@ -18,12 +19,11 @@ buildJson model =
       else
         "phx_join"
   in
-    stringify
-        { payload = model.channelName
-        , topic = "editor:other"
-        , event = event
-        , ref = model.refNumber
-        }
+    { payload = Json.Encode.string model.channelName
+    , topic = "editor:other"
+    , event = event
+    , ref = model.refNumber
+    }
 
 update : Msg -> Model b -> ( Model b, Cmd Msg )
 update action model =
@@ -39,14 +39,17 @@ update action model =
         jsonToSend =
           buildJson model
 
-        command =
-          MyWebSocket.send jsonToSend
-          
-
-        _ = Debug.log "Payload" jsonToSend
-
+        (newModel, command) =
+          update (ChannelUpdate <| ChannelUpdate.SendMessage jsonToSend) model
       in
-        ( { model | channelName = string }, command )
+        ( { newModel | channelName = string }, command )
+
+    ChannelUpdate action ->
+      let
+        (model', effect) =
+          ChannelUpdate.update action model
+      in
+        ( model', Cmd.map (ChannelUpdate) effect )
 
 
 
