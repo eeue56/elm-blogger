@@ -1,12 +1,8 @@
 module Creator.Update exposing (..) -- where
 
+import Json.Encode
 import Creator.Model exposing (..)
 import Component.Editor.Update as EditorUpdate
-import MyWebSocket
-import Json.Encode
-import Phoenix.Channel.Update as ChannelUpdate
-import Json.Decode exposing (decodeString)
-import Helper exposing (stringify)
 
 
 type Msg
@@ -16,7 +12,6 @@ type Msg
 type MessageRouter
   = TopLevel Msg
   | EditorLevel EditorUpdate.Msg
-  | ChannelLevel ChannelUpdate.ServerResponse
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -46,11 +41,4 @@ router route model =
           EditorUpdate.update action model
       in
         ( model', Cmd.map (EditorLevel) effect )
-
-    ChannelLevel action ->
-      let
-        (model', effect) =
-          ChannelUpdate.update action model
-      in
-        ( model', Cmd.map (ChannelLevel) effect )
 

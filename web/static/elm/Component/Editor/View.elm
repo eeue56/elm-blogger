@@ -9,6 +9,7 @@ import Component.Editor.Model exposing (..)
 import Component.Editor.Update exposing (..)
 
 
+
 view : Model a -> Html Msg
 view model =
   div

@@ -1,9 +1,10 @@
 module Component.Editor.Model exposing(..) -- where
 
+import Phoenix.Channel.Model
+
 type alias Model a =
-  { a
-  | inputText : String
-  , channelName : String
-  , refNumber : Int
-  , connected : Bool
-  }
+  Phoenix.Channel.Model.Model
+    { a
+    | inputText : String
+    , channelName : String
+    }

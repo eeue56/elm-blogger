@@ -7,21 +7,22 @@ import Creator.Update exposing (router, MessageRouter(..), Msg(..))
 import Creator.Model exposing (Model)
 import Creator.View exposing (view)
 import Component.Editor.API exposing (initialText)
-import Phoenix.Channel.Update exposing (assignResponseType)
+import Component.Editor.Update exposing (Msg(ChannelUpdate))
+import Phoenix.Channel.Helpers exposing (assignResponseType)
 
-import MyWebSocket
+
 import WebSocket
-import Helper exposing (stringify)
 
 main =
     let
         initModel : Model
         initModel =
-            { inputText = "dog"
+            { inputText = initialText
             , channelName = ""
             , refNumber = 0
             , connected = False
             , socketEvents = []
+            , socketUrl = "ws://localhost:4000/socket/websocket"
             }
 
 
@@ -37,6 +38,6 @@ main =
             }
 
 handleSubscriptions : Model -> Sub MessageRouter
-handleSubscriptions mode =
-    WebSocket.listen "ws://localhost:4000/socket/websocket" (ChannelLevel << assignResponseType)
+handleSubscriptions model =
+    WebSocket.listen model.socketUrl (EditorLevel << ChannelUpdate << assignResponseType)
 

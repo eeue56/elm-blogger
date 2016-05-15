@@ -15,6 +15,7 @@ main =
             , channelName = ""
             , refNumber = 0
             , connected = False
+            , socketUrl = ""
             }
 
         modelWithEffects =
