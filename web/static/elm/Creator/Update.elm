@@ -33,12 +33,12 @@ router route model =
         (model', effect) =
           update action model
       in
-        ( model', Cmd.map (TopLevel) effect )
+        (model', Cmd.map (TopLevel) effect)
 
     EditorLevel action ->
       let
         (model', effect) =
           EditorUpdate.update action model
       in
-        ( model', Cmd.map (EditorLevel) effect )
+        (model', Cmd.map (EditorLevel) effect)
 
