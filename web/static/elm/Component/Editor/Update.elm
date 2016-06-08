@@ -25,14 +25,14 @@ buildJson model =
     , ref = model.refNumber
     }
 
-update : Msg -> Model b -> ( Model b, Cmd Msg )
+update : Msg -> Model b -> (Model b, Cmd Msg)
 update action model =
   case action of
     NoOp ->
-      ( model, Cmd.none )
+      (model, Cmd.none)
 
     ModifyText str ->
-      ( { model | inputText = str }, Cmd.none )
+      ({ model | inputText = str }, Cmd.none)
 
     SetChannelName string ->
       let
@@ -42,14 +42,14 @@ update action model =
         (newModel, command) =
           update (ChannelUpdate <| ChannelUpdate.SendMessage jsonToSend) model
       in
-        ( { newModel | channelName = string }, command )
+        ({ newModel | channelName = string }, command)
 
     ChannelUpdate action ->
       let
         (model', effect) =
           ChannelUpdate.update action model
       in
-        ( model', Cmd.map (ChannelUpdate) effect )
+        (model', Cmd.map (ChannelUpdate) effect)
 
 
 
